@@ -1,5 +1,7 @@
 import UIKit
 
+// Create an app that displays emergency contact information. The user may select which contact it wants to display
+
 // Create contact info constants for each entry
 let jimContact = "Jim Beam\n568 Happy Hollow Rd\nClermont, KY 40110\n502-215-2295"
 let jackContact = "Jack Daniels\n182 Lynchburg Highway\nLynchburg, IL 37352\n931-759-6357 "
@@ -16,6 +18,7 @@ print(listOptions)
 print("User inputs 1\n")
 userChoice = 1
 
+// Using 'if' statements to display the user's choice
 if userChoice == 1 {
     print(jimContact)
     print("")
@@ -32,9 +35,11 @@ else if userChoice == 3 {
     print("Make a new selection\n" + listOptions)
 }
 
+// Get user input
 print("User inputs 2\n")
 userChoice = 2
 
+// Using 'if' statements to display the user's choice
 if userChoice == 1 {
     print(jimContact)
     print("")
@@ -51,9 +56,11 @@ else if userChoice == 3 {
     print("Make a new selection\n" + listOptions)
 }
 
+// Get user input
 print("User inputs 3\n")
 userChoice = 3
 
+// Using 'if' statements to display the user's choice
 if userChoice == 1 {
     print(jimContact)
     print("")
