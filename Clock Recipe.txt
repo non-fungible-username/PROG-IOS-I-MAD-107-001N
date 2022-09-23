@@ -1,0 +1,16 @@
+Clock Recipe
+
+Ingredients:
+var - current time
+var - current hour
+var - current minute
+var - current second
+func - check’s current time and prints it every second 
+
+Directions:
+create a function to run the program
+have it loop every second 
+create a variable that stores the current time
+isolate in separate variables the current hour, minute, and second
+print the current time in hours, minutes, and seconds
+run the function
