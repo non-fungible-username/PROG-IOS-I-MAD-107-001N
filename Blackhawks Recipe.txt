@@ -1,0 +1,32 @@
+Blackhawks Recipe
+
+Ingredients:
+dic - [player number:(named player stats)]
+var - stores values from dictionary
+func - creates and displays a list of players sorted by age
+func - creates and displays a list of players sorted by country
+func - calculates and displays the average age of the players
+func - calculates and displays the average height of the players
+func - determines and displays the month in which most of the players birthday falls
+
+Directions:
+	• func to print a list of players in order of age, youngest to oldest
+		- create a dictionary with players sorted by age
+		- print each player and age in order
+	• func that prints a list of players sorted by home country alphabetically
+		- create a dictionary with players sorted by country
+		- print each player and their country
+	• func that prints the average age of the players
+		- counts the players and adds the ages together
+		- create var to of average age
+		- print the average player age
+	• func that prints the average height of the players
+		- counts the players and adds the heights together
+		- create var to of average height
+		- print the average player height
+	• func that prints the month in which most of the players birthdays fall
+		- create an array of all the birth months
+		- create a dictionary with a key for each birth month paired to how 
+		  many times that month is a player's birth month
+		- find the month with he most players born with a loop
+		- print the month in which the most players born
