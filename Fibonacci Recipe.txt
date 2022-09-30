@@ -1,0 +1,18 @@
+Fibonacci Recipe
+
+Ingredients:
+func - contains the calculations and prints the series
+var = 0 - first number 
+var = 1 - second number
+var = 0 - to help with calculations
+var = 1 - counter for displaying series order
+while loop - to run calculations until next number in series is over 1000
+
+
+Directions:
+• Create the fibonacciSeries functions
+	- Initiate variables within
+	- Print statement to display what is happening
+	- While loop to perform calculations and print each number in series before it exceeds 1000
+	
+• Run the function
