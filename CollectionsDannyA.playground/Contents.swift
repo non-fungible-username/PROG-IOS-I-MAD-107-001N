@@ -52,5 +52,5 @@ func whichGamePlay(players: Int, youngest: Int) {
     }
 }
 // Run the function
-whichGamePlay(players: 4, youngest: 18)
+whichGamePlay(players: 4, youngest: 10)
  
