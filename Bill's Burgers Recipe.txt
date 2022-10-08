@@ -3,7 +3,7 @@ Bill's Burgers Recipe
 Ingredients:
 dictionary burgerMenu - contains the key for burger name paired to a price
 enum Burgers - for name and cases for the description
-struct burgerOrder - takes and builds the order
+struct BurgerOrder - takes and builds the order
 var burgerName - in struct for burgerName property
 var fullOrder - list to hold entire order
 var totalPrice - double to keep total price
