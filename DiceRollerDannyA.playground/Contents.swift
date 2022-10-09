@@ -65,4 +65,4 @@ func rollDice(dieSides: Int, rolls: Int, modifier: Int) {
 }
 
 // Run the funcion
-rollDice(dieSides: 20, rolls: 10, modifier: 9)
+rollDice(dieSides: 20, rolls: 4, modifier: 1)
