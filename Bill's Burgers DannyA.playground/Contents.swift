@@ -5,18 +5,19 @@ import UIKit
 
 var burgerMenu = ["BillMac":5.99, "HillBilly":6.99, "BillBQ":7.49, "FriedBillony":6.49, "ImpossiBill":7.99]
 
-enum Burgers {
-    case BillMac
-    case HillBilly
-    case BillBQ
-    case FriedBillony
-    case ImpossiBill
+var fullOrder = [String]()
+var totalPrice = 0.00
+
+enum Burgers: String {
+    case BillMac = "The Bill Mac"
+    case HillBilly = "The Hill Billy"
+    case BillBQ = "The BillBQ"
+    case FriedBillony = "Fried Billony"
+    case ImpossiBill = "ImpossiBill Burger"
 }
 
 struct BurgerOrder {
     var burgerName: String?
-    var fullOrder: [String]?
-    var totalPrice: Double?
     
     func showMenu() {
         print("Bill's Burgers Menu")
@@ -28,18 +29,15 @@ struct BurgerOrder {
         print("5. ImpossiBill Burger")
     }
     
-    func addBurger() {
+    func addBurger(Burger: Burgers) {
         print("Add burger to order")
         if let thisBurger = burgerName {
-            fullOrder.insert(thisBurger) // add burger to fullOrder
+            fullOrder.append(thisBurger) // add burger to fullOrder
             for (item, value) in burgerMenu {
-                if thisBurger == burgerMenu[item] {
-                    if let burgerCost = value {
-                        totalPrice += value
-                    }
+                if thisBurger == item {
+                    totalPrice += value
                 }
             }
-            
         } else {
             print("No item added")
         }
@@ -52,12 +50,15 @@ struct BurgerOrder {
             counter += 1
             print("\(counter). \(item)")
         }
-        print("Your total comes to $\(totalPrice ?? 0.00)")
+        var currentTotal = String(format: "%.2f", totalPrice)
+        print("Your total comes to $\(currentTotal)")
     }
     
 }
 
 var myOrder = BurgerOrder()
 
-
+myOrder.showMenu()
+myOrder.showOrder()
+myOrder.addBurger(Burger: HillBilly)
 
