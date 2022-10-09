@@ -1,0 +1,29 @@
+Bill's Burgers Recipe
+
+Ingredients:
+dictionary burgerMenu - contains the key for burger name paired to a price
+enum Burgers - for name and cases for the description
+struct BurgerOrder - takes and builds the order
+var burgerName - in struct for burgerName property
+var fullOrder - list to hold entire order
+var totalPrice - double to keep total price
+func showMenu - displays burger options, prices, and descriptions
+func addBurger - add burger to order
+func showOrder - to total price and display final order
+
+Directions:
+• Create the dictionary burgerMenu
+	- key for each burger paired with the price
+• Create the enum Burgers
+	- Use cases and switch statement for the descriptions
+• Create the struct BurgerOrder
+	- var burgerName property
+	- var fullOrder list for holding the burger orders
+	- var totalPrice to add final total
+	- func showMenu: uses enum to display burger options and descriptions
+	- func addBurger: adds burger to fullOrder list, adds price using burgerMenu dictionary to totalPrice
+	- func showOrder: calculates and displays full order and price
+• Create a new struct var myOrder = BurgerOrder
+• Use method showMenu to display burger options, prices, and descriptions to user
+• Use method addBurger to add burgers to the order
+• Use method showOrder to display final order and total
