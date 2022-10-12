@@ -1,0 +1,42 @@
+// Create the recipe and ingredients to define a playground that allows you to select the model, color, packages, and accessories.
+// Info needed for project..
+// Prius models: L Eco, LE, LE AWD-e, XLE AWD-e, Nightshade Edition AWD-e, Nightshade Edition FWD, Limited
+// Prius colors: white, wind chill pearl*, classic silver metallic, magnetic gray metallic, midnight black metallic, supersonic red*, sea glass pearl, electric storm blue
+// Prius packages: Premium Convenience Package, Advanced Technology Package, All-Weather Floor Liner Package, Carpet Mat Package, Preferred Accessory Package w/All Weather Floor Liners, Preferred Accessory Package w/Carpet Mats, Protection Package #2, Protection Package #3
+// Prius accessories: Aero Side Splitter, Alloy Wheel Locks, Blackout Wheel Inserts, Body Side Moldings, Cat Shield, Door Edge Guards, Paint Protection Film (front bumper), Paint Protection Film (hood, fenders, mirror backs, and door cups), Rear Bumper Appliqué, Rear Bumper Protector, Removable Cross Bars, Stainless Steel Cat Shield, Yakima FatCat EVO 6 Black Premium Ski and Snowboard Mount, Yakima FrontLoader Rooftop Upright Bike Mount, Yakima JayLow J-Cradle Rooftop Kayak Mount, Yakima KeelOver Canoe Carrier, Yakima SkyBox 16 Carbonite, All-Weather Floor Liner, Cargo Liner, Cargo Net-Envelope, Cargo Tote, Carpet Cargo Mat, Carpet Floor Mats, Coin Holder/Ashtray Cup, Emergency Kit, First Aid Kit w/PPE, Frameless Homelink Mirror, Illuminated Door Sills, Quick Charge Cable Package, Universal Tablet Holder
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Ingredients:
+enum Models - model choices
+enum Colors - color choices
+enum Packages - package choices
+enum Accessories - accessory choices
+
+class Prius - will use to build the car
+var model - String - use Models enum for parameter
+var color - String - use Colors enum for parameter
+var package - Array? - use Packages enum for parameter
+var accessory - Array? - use Accessories enum for parameter
+
+func showSelections - displays the current car choices
+func changeModel - changes the model selection
+func changeColor - changes the color selection
+func addPackage - adds a package to the object
+func addAccessory - adds an accessory to the object
+func removePackage - removes a package from the object
+func removeAccessory - removes an accessory from the object
+
+Directions:
+• Create the enums for our selections for options
+-have each case equal a String of the actual wording for the option
+• Create the Prius class with mentioned variables
+• Initiate the model and color variables
+• Create showSelections function that prints the current options added to the Prius
+-must unwrap optionals
+• Create a function that changes the chosen model
+• Create a function that changes the chosen color
+• Create a function that adds a package 
+• Create a function that removes a package
+• Create a function that adds a accessory 
+• Create a function that removes a accessory
