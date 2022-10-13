@@ -72,7 +72,11 @@ struct PackageOptions {
     var package: [Packages]
     
     init(items: [Packages]) {
-        self.package = items
+        var test = [Packages]()
+        for item in items {
+            test = [item]
+        }
+        self.package = test
     }
 }
 
