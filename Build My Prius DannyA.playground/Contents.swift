@@ -101,15 +101,15 @@ class Prius {
         print("Your model selection is \(self.model.rawValue)")
         print("Your color selection is \(self.color.rawValue)")
         if let packageChoices = self.package {
-            for item in packageChoices {
-                print("\(item)")
+           for item in packageChoices {
+               print("Your packages selections include: \(item)")
             }
         } else {
             print("No packages have been selected")
         }
         if let accessoryChoices = self.accessory {
             for choices in accessoryChoices {
-                print(choices)
+                print("Your accessory selections include: \(choices)")
             }
         } else {
             print("No accessories have been selected")
