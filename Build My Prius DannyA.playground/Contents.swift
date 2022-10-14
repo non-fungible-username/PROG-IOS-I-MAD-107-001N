@@ -68,66 +68,57 @@ enum Accessories: String {
     case UniversalTabletHolder = "Universal Tablet Holder"
 }
 
-struct PackageOptions {
-    var package: [Packages]
-    
-    init(items: [Packages]) {
-        var test = [Packages]()
-        for item in items {
-            test = [item]
-        }
-        self.package = test
-    }
-}
-
-struct AccessoryOptions {
-    var accessory: [Accessories]
-    
-    init(items: [Accessories]) {
-        self.accessory = items
-    }
-}
-
 class Prius {
     var model: Models
     var color: Colors
-    var package: [PackageOptions]?
-    var accessory: [AccessoryOptions]?
+    var package: [Packages] = []
+    var accessory: [Accessories] = []
     
     init(model: Models, color: Colors) {
         self.model = model
         self.color = color
-       // self.package = package
-       // self.accessory = accessory
     }
 
     func showSelections() {
         print("Your model selection is \(self.model.rawValue)")
         print("Your color selection is \(self.color.rawValue)")
-        if let packageChoices = self.package {
-           for item in packageChoices {
-               print("Your packages selections include: \(item)")
+        
+        if self.package.count > 0 {
+            print("Your packages selections include: ", terminator: "")
+            for choice in self.package {
+                if choice == self.package[0] {
+                    print("\(choice.rawValue)", terminator: "")
+                } else {
+                    print(", \(choice.rawValue)", terminator: "")
+                }
             }
         } else {
-            print("No packages have been selected")
+            print("No packages have been selected", terminator: "")
         }
-        if let accessoryChoices = self.accessory {
-            for choices in accessoryChoices {
-                print("Your accessory selections include: \(choices)")
+        
+        if self.accessory.count > 0 {
+            print("\nYour accessories selections include: ", terminator: "")
+            for choice in self.accessory {
+                if choice == self.accessory[0] {
+                    print("\(choice.rawValue)", terminator: "")
+                } else {
+                    print(", \(choice.rawValue)", terminator: "")
+                }
             }
         } else {
-            print("No accessories have been selected")
+            print("\nNo accessories have been selected")
         }
         print("")
     }
 }
 
-var myPrius = Prius(model: .LEco, color: .MagneticGrayMetallic)
+var myPrius = Prius(model: .LEco, color: .ClassicSilverMetallic)
+
 myPrius.showSelections()
 
-var myPackages = PackageOptions(items: [.PreferredAccessoryPackageWithCarpetMats])
-var myAccessories = AccessoryOptions(items: [.BlackoutWheelInserts, .CargoLiner, .BodySideMoldings])
+myPrius.package = [.PreferredAccessoryPackageWithCarpetMats, .AllWeatherFloorLinerPackage, .PremiumConveniencePackage]
+myPrius.accessory = [.BlackoutWheelInserts, .AllWeatherFloorLiner]
 
-myPrius.package = [myPackages]
-myPrius.accessory = [myAccessories]
 myPrius.showSelections()
+
+
