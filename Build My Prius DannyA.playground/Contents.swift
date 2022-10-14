@@ -108,6 +108,30 @@ class Prius {
         } else {
             print("\nNo accessories have been selected")
         }
+        print("\n")
+    }
+    
+    func removePackage(package: Packages) {
+        for item in self.package {
+            var counter = 0
+            if package == item {
+                print("\(item.rawValue) has been removed")
+                self.package.remove(at: counter)
+            }
+            counter += 1
+        }
+        print("")
+    }
+    
+    func removeAccessory(accessory: Accessories) {
+        for item in self.accessory {
+            var counter = 0
+            if accessory == item {
+                print("\(item.rawValue) has been removed")
+                self.accessory.remove(at: counter)
+            }
+            counter += 1
+        }
         print("")
     }
 }
@@ -121,4 +145,6 @@ myPrius.accessory = [.BlackoutWheelInserts, .AllWeatherFloorLiner]
 
 myPrius.showSelections()
 
+myPrius.removePackage(package: .PreferredAccessoryPackageWithCarpetMats)
 
+myPrius.showSelections()
