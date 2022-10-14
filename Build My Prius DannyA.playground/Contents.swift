@@ -202,35 +202,32 @@ class Prius {
     }
 }
 
+// Testing the code
 var billsPrius = Prius(model: .NightshadeEditionFWDe, color: .ClassicSilverMetallic)
+billsPrius.showSelections() // displays current object build
 
+billsPrius.addAccessory(accessory: [.QuickChargeCablePackage]) // displays accessory added
 billsPrius.showSelections()
 
-billsPrius.addAccessory(accessory: [.QuickChargeCablePackage])
-
+billsPrius.addPackage(package: [.AdvancedTechnologyPackage, .PremiumConveniencePackage]) // displays both packages added
 billsPrius.showSelections()
 
-billsPrius.addPackage(package: [.AdvancedTechnologyPackage, .PremiumConveniencePackage])
-
+billsPrius.removePackage(package: .PremiumConveniencePackage) // displays package removed
 billsPrius.showSelections()
 
-billsPrius.removePackage(package: .PremiumConveniencePackage)
-
+billsPrius.removeAccessory(accessory: .QuickChargeCablePackage) // displays accessory removed
 billsPrius.showSelections()
 
-billsPrius.removeAccessory(accessory: .QuickChargeCablePackage)
+billsPrius.removePackage(package: .ProtectionPackage3) // displays error
+billsPrius.removeAccessory(accessory: .UniversalTabletHolder) // displays error
 
-billsPrius.showSelections()
+billsPrius.addPackage(package: [.PremiumConveniencePackage, .AllWeatherFloorLinerPackage, .CarpetMatPackage]) //displays only first element is error
+billsPrius.addAccessory(accessory: [.UniversalTabletHolder, .CargoTote, .BodySideMoldings]) // displays all elements added
 
-billsPrius.removePackage(package: .ProtectionPackage3)
-billsPrius.removeAccessory(accessory: .UniversalTabletHolder)
-
-billsPrius.addPackage(package: [.PremiumConveniencePackage, .AllWeatherFloorLinerPackage, .CarpetMatPackage])
-billsPrius.addAccessory(accessory: [.UniversalTabletHolder, .CargoTote, .BodySideMoldings])
-billsPrius.changeModel(new_model: .NightshadeEditionFWDe)
-billsPrius.changeModel(new_model: .Limited)
-billsPrius.changeColor(new_color: .ClassicSilverMetallic)
-billsPrius.changeColor(new_color: .MidnightBlackMetallic)
+billsPrius.changeModel(new_model: .NightshadeEditionFWDe) // displays error
+billsPrius.changeModel(new_model: .Limited) // displays new model choice
+billsPrius.changeColor(new_color: .ClassicSilverMetallic) // displays error
+billsPrius.changeColor(new_color: .MidnightBlackMetallic) // displays new color choice
 
 billsPrius.showSelections()
 
