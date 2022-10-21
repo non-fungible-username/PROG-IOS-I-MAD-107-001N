@@ -1,17 +1,16 @@
 import UIKit
 
-let getRoll = { (die: Int) -> (Int) in
-    var dieRoll = Int.random(in: 1...die)
-    return dieRoll
-}
+let date = Date()
+let df = DateFormatter()
+df.dateFormat = "yyyy-MM-dd HH:mm:ss"
+let dateString = df.string(from: date)
+print(dateString)
 
-func rollDice(die: Int, rolls: Int) {
-    print("You rolled a \(die)-sided die \(rolls) times.")
-    var totalRoll = 0
-    for _ in 0..<rolls {
-        totalRoll += getRoll(die)
-    }
-    print("Your roll total is: \(totalRoll)")
+func currentTime() -> String {
+    let date = Date()
+    let calendar = Calendar.current
+    let hour = calendar.component(.hour, from: date)
+    let minutes = calendar.component(.minute, from: date)
+    return "\(hour):\(minutes)"
 }
-
-rollDice(die: 20, rolls: 2)
+print(currentTime())

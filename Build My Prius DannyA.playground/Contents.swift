@@ -219,7 +219,7 @@ billsPrius.removeAccessory(accessory: .QuickChargeCablePackage) // displays acce
 billsPrius.showSelections()
 
 billsPrius.removePackage(package: .ProtectionPackage3) // displays error
-billsPrius.removeAccessory(accessory: .UniversalTabletHolder) // displays error
+billsPrius.removeAccessoNry(accessory: .UniversalTabletHolder) // displays error
 
 billsPrius.addPackage(package: [.PremiumConveniencePackage, .AllWeatherFloorLinerPackage, .CarpetMatPackage]) //displays only first element is error
 billsPrius.addAccessory(accessory: [.UniversalTabletHolder, .CargoTote, .BodySideMoldings]) // displays all elements added
