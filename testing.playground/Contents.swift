@@ -14,3 +14,37 @@ func currentTime() -> String {
     return "\(hour):\(minutes)"
 }
 print(currentTime())
+
+/* In Beta
+struct TopWords {
+    let word: String
+    let timesUsed: Int
+    var topWordLog: [String:Int] = [:]
+    
+    func showTopWords() {
+        var counter = 1
+        for (item, instances) in topWordLog {
+            print("\(counter). \(item) used \(instances) times")
+            counter += 1
+        }
+    }
+}
+ 
+ // Saves current game to game ledger
+ func saveGame() {
+     thisGame.words = gameWords
+     GameLedger.pastGames[timeStamp] = thisGame // uses the time made as the key, may change later
+ }
+ 
+ // Sets all game variables back to beginging condition
+ func resetGame(Players: [String]) {
+     thisGame = GameInfo(players: Players, mode: .Normal, words: [(letter: "-empty-", word: "-empty-")])
+     players = Players
+     gameMode = .Normal
+     timeStamp = ""
+     gameLetters = Letters.alphabet
+     gameWords = []
+     wordIndex = 0
+ }
+ 
+*/

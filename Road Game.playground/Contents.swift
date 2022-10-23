@@ -31,22 +31,6 @@ enum GameModes: String {
     case OnlyLicenses = "Only License Plates Mode"
 }
 
-/* In Beta
-struct TopWords {
-    let word: String
-    let timesUsed: Int
-    var topWordLog: [String:Int] = [:]
-    
-    func showTopWords() {
-        var counter = 1
-        for (item, instances) in topWordLog {
-            print("\(counter). \(item) used \(instances) times")
-            counter += 1
-        }
-    }
-}
-*/
-
 // Struct to fill out game information for saving and referencing
 struct GameInfo {
     let players: [String]
@@ -105,12 +89,6 @@ class ABCGame {
         
         // Displays the first letter needed
         print("The first letter is \(gameLetters[wordIndex])\n")
-    }
-    
-    // Saves current game to game ledger
-    func saveGame() {
-        thisGame.words = gameWords
-        GameLedger.pastGames[timeStamp] = thisGame // uses the time made as the key, may change later
     }
     
     // Asks for a word to progress the game
@@ -181,18 +159,6 @@ class ABCGame {
             }
         }
         print("") // display separator
-        
-    }
-    
-    // Sets all game variables back to beginging condition
-    func resetGame(Players: [String]) {
-        thisGame = GameInfo(players: Players, mode: .Normal, words: [(letter: "-empty-", word: "-empty-")])
-        players = Players
-        gameMode = .Normal
-        timeStamp = ""
-        gameLetters = Letters.alphabet
-        gameWords = []
-        wordIndex = 0
     }
 }
  
