@@ -164,9 +164,17 @@ class ABCGame {
  
 var myGame = ABCGame(Players: ["Player 1", "Player 2"])
 
-myGame.startGame(Mode: .Random)
+ myGame.startGame(Mode: .Normal)
 
-/* Testing when all letters in alphabet are used
+// myGame.startGame(Mode: .Random)
+
+// myGame.startGame(Mode: .StartWLetter)
+
+//myGame.enterWord(Enter_A_Word: "McDonalds")
+
+//myGame.enterWord(Enter_A_Word: "Arbys")
+
+// Testing when all letters in alphabet are used
 myGame.enterWord(Enter_A_Word: "a")
 myGame.enterWord(Enter_A_Word: "b")
 myGame.enterWord(Enter_A_Word: "c")
@@ -193,4 +201,4 @@ myGame.enterWord(Enter_A_Word: "w")
 myGame.enterWord(Enter_A_Word: "x")
 myGame.enterWord(Enter_A_Word: "y")
 myGame.enterWord(Enter_A_Word: "z")
-*/
+
