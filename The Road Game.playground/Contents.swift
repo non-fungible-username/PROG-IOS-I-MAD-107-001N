@@ -63,6 +63,32 @@ class ABCGame {
         return "\(dateString)"
     }
     
+    // Displays instructions for how to start and play a game
+    func instructions() {
+        print("*LET'S PLAY THE ALPHABET ROAD GAME*\n")
+        
+        print("How to Start")
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        print("Use the .startGame method and select a game mode.\n")
+        
+        print("How to Play")
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        print("Find all 26 letters of the alphabet on things that you pass as you")
+        print("are going down the road, in alphabetical order.\n")
+        print("Use the .enterWord method to add in each word, the game will then")
+        print("show you the next letter to find.\n")
+        print("After all 26 letters are found, the game ends and your final")
+        print("results will display.\n")
+        
+        print("Game Modes")
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        print("Normal: the word must contain the current round's letter")
+        print("Random: shuffles the alphabet")
+        print("Starts With Letter: the word must start with current round's letter")
+        print("Only Signs: can only find letters on signs")
+        print("Only License Plates: can only use letters found on license plates\n")
+    }
+    
     // Begins a new game and asks for the desired game mode
     func startGame(Mode: GameModes) {
         gameMode = Mode
@@ -164,7 +190,9 @@ class ABCGame {
  
 var myGame = ABCGame(Players: ["Player 1", "Player 2"])
 
- myGame.startGame(Mode: .Normal)
+myGame.instructions()
+
+myGame.startGame(Mode: .Normal)
 
 // myGame.startGame(Mode: .Random)
 
@@ -174,7 +202,7 @@ var myGame = ABCGame(Players: ["Player 1", "Player 2"])
 
 //myGame.enterWord(Enter_A_Word: "Arbys")
 
-// Testing when all letters in alphabet are used
+/* Testing when all letters in alphabet are used
 myGame.enterWord(Enter_A_Word: "a")
 myGame.enterWord(Enter_A_Word: "b")
 myGame.enterWord(Enter_A_Word: "c")
@@ -201,4 +229,4 @@ myGame.enterWord(Enter_A_Word: "w")
 myGame.enterWord(Enter_A_Word: "x")
 myGame.enterWord(Enter_A_Word: "y")
 myGame.enterWord(Enter_A_Word: "z")
-
+*/
