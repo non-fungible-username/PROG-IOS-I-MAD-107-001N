@@ -52,6 +52,7 @@ class ABCGame {
     
     init(Players: [String]) {
         self.players = Players
+        instructions()
     }
     
     // Sets the current time and formats as a legible string
@@ -65,23 +66,26 @@ class ABCGame {
     
     // Displays instructions for how to start and play a game
     func instructions() {
-        print("*LET'S PLAY THE ALPHABET ROAD GAME*\n")
+        print("*** LET'S PLAY THE ALPHABET ROAD GAME ***\n\n")
         
+        print("------------")
         print("How to Start")
-        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-        print("Use the .startGame method and select a game mode.\n")
+        print("------------")
+        print("Use the .startGame method and select a game mode.\n\n")
         
+        print("-----------")
         print("How to Play")
-        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        print("-----------")
         print("Find all 26 letters of the alphabet on things that you pass as you")
         print("are going down the road, in alphabetical order.\n")
         print("Use the .enterWord method to add in each word, the game will then")
         print("show you the next letter to find.\n")
         print("After all 26 letters are found, the game ends and your final")
-        print("results will display.\n")
+        print("results will display.\n\n")
         
+        print("----------")
         print("Game Modes")
-        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        print("----------")
         print("Normal: the word must contain the current round's letter")
         print("Random: shuffles the alphabet")
         print("Starts With Letter: the word must start with current round's letter")
@@ -131,7 +135,7 @@ class ABCGame {
                 print("You entered: \(Enter_A_Word)")
                 
                 // print results if all 26 letters have been used
-                if myGame.gameWords.count == Letters.max {
+                if self.gameWords.count == Letters.max {
                     print("\nHurray, you finished the game!")
                     print("Lets see your words")
                     print("''''''''''''''''''''''''''''''")
@@ -161,7 +165,7 @@ class ABCGame {
                 print("You entered: \(Enter_A_Word)")
                 
                 // print results if all 26 letters have been used
-                if myGame.gameWords.count == Letters.max {
+                if self.gameWords.count == Letters.max {
                     print("\nHurray, you finished the game!")
                     print("Lets see your words")
                     print("''''''''''''''''''''''''''''''") // will make cooler
@@ -190,9 +194,7 @@ class ABCGame {
  
 var myGame = ABCGame(Players: ["Player 1", "Player 2"])
 
-myGame.instructions()
-
-myGame.startGame(Mode: .Normal)
+// myGame.startGame(Mode: .Normal)
 
 // myGame.startGame(Mode: .Random)
 
