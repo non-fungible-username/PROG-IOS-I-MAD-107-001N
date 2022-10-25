@@ -25,10 +25,15 @@ struct GameLedger {
 // Enum for each game mode
 enum GameModes: String {
     case Normal = "Normal Mode"
-    case Random = "Random Mode"
     case StartWLetter = "Starts with Letter Mode"
     case OnlySigns = "Only Signs Mode"
     case OnlyLicenses = "Only License Plates Mode"
+}
+
+// Enum for checking status of "random" selection
+enum ToggleSwitch: String {
+    case on = "on"
+    case off = "off"
 }
 
 // Struct to fill out game information for saving and referencing
@@ -72,6 +77,8 @@ class ABCGame {
         print("How to Start")
         print("------------")
         print("Use the .startGame method and select a game mode.\n\n")
+        print("If you would like to shuffle the letter order,")
+        print("choose .on, otherwise choose .off")
         
         print("-----------")
         print("How to Play")
@@ -87,14 +94,13 @@ class ABCGame {
         print("Game Modes")
         print("----------")
         print("Normal: the word must contain the current round's letter")
-        print("Random: shuffles the alphabet")
         print("Starts With Letter: the word must start with current round's letter")
         print("Only Signs: can only find letters on signs")
         print("Only License Plates: can only use letters found on license plates\n")
     }
     
     // Begins a new game and asks for the desired game mode
-    func startGame(Mode: GameModes) {
+    func startGame(Mode: GameModes, Randomize: ToggleSwitch) {
         gameMode = Mode
         timeStamp = currentTime()
         
@@ -102,13 +108,14 @@ class ABCGame {
         
         GameLedger.pastGames[timeStamp] = thisGame // creates instance of this game in game ledger
         
+        if ToggleSwitch.on.rawValue == "on" {
+            gameLetters.shuffle() // randomizes letter order
+        }
+        
         // Displays game mode selected
         switch gameMode {
         case .Normal:
             print("Starting a new game in Normal Mode")
-        case .Random:
-            gameLetters.shuffle() // randomizes letter order
-            print("Starting a new game in Random Mode")
         case .StartWLetter:
             print("Starting a new game in which the word must start with the current letter")
         case .OnlySigns:
@@ -118,6 +125,9 @@ class ABCGame {
         }
         
         // Displays the first letter needed
+        if ToggleSwitch.on.rawValue == "on" {
+            print("The letter order has been randomized")
+        }
         print("The first letter is \(gameLetters[wordIndex])\n")
     }
     
@@ -127,7 +137,7 @@ class ABCGame {
         
         // Checks if word entered meets requirements for each mode
         switch gameMode {
-        case .Normal, .OnlySigns, .OnlyLicenses, .Random:
+        case .Normal, .OnlySigns, .OnlyLicenses:
             // Needs the word entered to contain the letter
             if Enter_A_Word.range(of: gameLetters[wordIndex], options: .caseInsensitive) != nil {
                 gameWords += [(letter: (gameLetters[wordIndex]), word: Enter_A_Word)] // saves word and letter pair
@@ -194,9 +204,7 @@ class ABCGame {
  
 var myGame = ABCGame(Players: ["Player 1", "Player 2"])
 
-// myGame.startGame(Mode: .Normal)
-
-// myGame.startGame(Mode: .Random)
+myGame.startGame(Mode: .Normal, Randomize: .on)
 
 // myGame.startGame(Mode: .StartWLetter)
 
