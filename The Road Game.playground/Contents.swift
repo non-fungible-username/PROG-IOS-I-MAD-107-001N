@@ -36,10 +36,17 @@ enum ToggleSwitch: String {
     case off = "off"
 }
 
+// Enum for the players to pick the starting letter
+enum LetterChoices: String {
+    case A = "A", B = "B", C = "C", D = "D", E = "E", F = "F", G = "G", H = "H", I = "I", J = "J", K = "K", L = "L", M = "M", N = "N", O = "O", P = "P", Q = "Q", R = "R", S = "S", T = "T", U = "U", V = "V", W = "W", X = "X", Y = "Y", Z = "Z"
+}
+
 // Struct to fill out game information for saving and referencing
 struct GameInfo {
     let players: [String]
     let mode: GameModes
+    let randomized: ToggleSwitch
+    let firstLetter: LetterChoices
     var words: [(letter: String, word: String)]
 }
 
@@ -53,10 +60,14 @@ class ABCGame {
     var gameLetters = Letters.alphabet // fills in this game instance's letter array
     var gameWords:[(letter: String, word: String)] = [] // stores each word used for each letter in this game instance
     var wordIndex = 0 // helps count through gameLetters array
-    var thisGame = GameInfo(players: ["None"], mode: .Normal, words: [(letter: "-empty-", word: "-empty-")]) // I'm sure this can be done smarter
+    var randomMode = ToggleSwitch.off // set when starting a new game
+    var letterCounter = 0 // helps reorder letters when user chooses a starting letter
+    var startingLetter: LetterChoices = .A // set when starting a new game
+    var thisGame = GameInfo(players: ["None"], mode: .Normal, randomized: .off, firstLetter: .A, words: [(letter: "-empty-", word: "-empty-")]) // I'm sure this can be done smarter
     
-    init(Players: [String]) {
-        self.players = Players
+    // Only asks for input of player names and displays the instructions on creation
+    init(Player_Names: [String]) {
+        self.players = Player_Names
         instructions()
     }
     
@@ -76,9 +87,10 @@ class ABCGame {
         print("------------")
         print("How to Start")
         print("------------")
-        print("Use the .startGame method and select a game mode.\n\n")
-        print("If you would like to shuffle the letter order,")
-        print("choose .on, otherwise choose .off")
+        print("Use the .startGame method to select a game mode, then you can")
+        print("choose a starting letter.\n")
+        print("If you would like to shuffle the letters into a random order,")
+        print("choose .on, otherwise choose .off\n\n")
         
         print("-----------")
         print("How to Play")
@@ -95,22 +107,20 @@ class ABCGame {
         print("----------")
         print("Normal: the word must contain the current round's letter")
         print("Starts With Letter: the word must start with current round's letter")
-        print("Only Signs: can only find letters on signs")
+        print("Only Signs: can only use letters found on signs")
         print("Only License Plates: can only use letters found on license plates\n")
     }
     
-    // Begins a new game and asks for the desired game mode
-    func startGame(Mode: GameModes, Randomize: ToggleSwitch) {
+    // Begins a new game by setting desired game mode, starting letter, and randomize on or off
+    func startGame(Mode: GameModes, Starting_Letter: LetterChoices, Randomize: ToggleSwitch) {
         gameMode = Mode
+        randomMode = Randomize
+        startingLetter = Starting_Letter
+        
+        // Set variables for the Game Ledger and make initial save
         timeStamp = currentTime()
-        
-        thisGame = GameInfo(players: players, mode: gameMode, words: gameWords) // creates info for this game instance
-        
+        thisGame = GameInfo(players: players, mode: gameMode, randomized: randomMode, firstLetter: startingLetter, words: gameWords) // creates info for this game instance
         GameLedger.pastGames[timeStamp] = thisGame // creates instance of this game in game ledger
-        
-        if ToggleSwitch.on.rawValue == "on" {
-            gameLetters.shuffle() // randomizes letter order
-        }
         
         // Displays game mode selected
         switch gameMode {
@@ -123,18 +133,51 @@ class ABCGame {
         case .OnlyLicenses:
             print("Starting a new game in which only license plates can be used")
         }
-        
-        // Displays the first letter needed
-        if ToggleSwitch.on.rawValue == "on" {
+
+        // Displays message if randomize is set to on and randomizes letter order
+        if randomMode == .on {
+            gameLetters.shuffle()
             print("The letter order has been randomized")
         }
+        
+        // Changes the starting letter chosen by user
+        for letter in gameLetters {
+            if letter == startingLetter.rawValue {
+                wordIndex = letterCounter
+            }
+            letterCounter += 1
+        }
+
+        // Displays the first letter needed
         print("The first letter is \(gameLetters[wordIndex])\n")
+    }
+    
+    // Used within enterWord func to trigger the end of a game when 26th letter has been used
+    func endGame() {
+        var counter = 1 // for printing results when game is complete
+        
+        if self.gameWords.count == Letters.max {
+            print("\nHurray, you finished the game!")
+            print("Lets see your words")
+            print("''''''''''''''''''''''''''''''")
+            
+            // Shows all words picked for each letter
+            for (letter, word) in gameWords {
+                // For display setting
+                if counter < 10 {
+                    print("0\(counter). \(letter) - \(word)")
+                } else {
+                    print("\(counter). \(letter) - \(word)")
+                }
+                counter += 1
+            }
+        } else { // Displays letter needed for next word
+                print("The next letter is \(gameLetters[wordIndex])")
+        }
     }
     
     // Asks for a word to progress the game
     func enterWord(Enter_A_Word: String) {
-        var counter = 1 // for printing results when game is complete
-        
         // Checks if word entered meets requirements for each mode
         switch gameMode {
         case .Normal, .OnlySigns, .OnlyLicenses:
@@ -142,27 +185,17 @@ class ABCGame {
             if Enter_A_Word.range(of: gameLetters[wordIndex], options: .caseInsensitive) != nil {
                 gameWords += [(letter: (gameLetters[wordIndex]), word: Enter_A_Word)] // saves word and letter pair
                 wordIndex += 1 // helps progress to next letter needed
+                
+                // Corrects the letter selction if starting letter was changed
+                if wordIndex == Letters.max {
+                    wordIndex -= Letters.max
+                }
+                
                 print("You entered: \(Enter_A_Word)")
                 
                 // print results if all 26 letters have been used
-                if self.gameWords.count == Letters.max {
-                    print("\nHurray, you finished the game!")
-                    print("Lets see your words")
-                    print("''''''''''''''''''''''''''''''")
-                    
-                    // Shows all words picked for each letter
-                    for (letter, word) in gameWords {
-                        // For display setting
-                        if counter < 10 {
-                            print("0\(counter). \(letter) - \(word)")
-                        } else {
-                            print("\(counter). \(letter) - \(word)")
-                        }
-                        counter += 1
-                    }
-                } else { // Displays letter needed for next word
-                    print("The next letter is \(gameLetters[wordIndex])")
-                }
+                endGame()
+                
             } else { // Asks for a valid word
                 print("\(Enter_A_Word) does not have the letter \(gameLetters[wordIndex])")
                 print("Please enter a different word")
@@ -172,27 +205,17 @@ class ABCGame {
             if Enter_A_Word.uppercased().hasPrefix(gameLetters[wordIndex]) == true {
                 gameWords += [(letter: (gameLetters[wordIndex]), word: Enter_A_Word)] // saves word and letter pair
                 wordIndex += 1 // helps progress to next letter needed
+                
+                // Corrects the letter selction if starting letter was changed
+                if wordIndex == Letters.max {
+                    wordIndex -= Letters.max
+                }
+                
                 print("You entered: \(Enter_A_Word)")
                 
                 // print results if all 26 letters have been used
-                if self.gameWords.count == Letters.max {
-                    print("\nHurray, you finished the game!")
-                    print("Lets see your words")
-                    print("''''''''''''''''''''''''''''''") // will make cooler
-                    
-                    // Shows all words picked for each letter
-                    for (letter, word) in gameWords {
-                        // For display setting
-                        if counter < 10 {
-                            print("0\(counter). \(letter) - \(word)")
-                        } else {
-                            print("\(counter). \(letter) - \(word)")
-                        }
-                        counter += 1
-                    }
-                } else { // Displays letter needed for next word
-                    print("The next letter is \(gameLetters[wordIndex])")
-                }
+                endGame()
+                
             } else { // Asks for a valid word
                 print("\(Enter_A_Word) does not start with the letter \(gameLetters[wordIndex])")
                 print("Please enter a different word")
@@ -202,17 +225,16 @@ class ABCGame {
     }
 }
  
-var myGame = ABCGame(Players: ["Player 1", "Player 2"])
+var myGame = ABCGame(Player_Names: ["Player 1", "Player 2"])
 
-myGame.startGame(Mode: .Normal, Randomize: .on)
+myGame.startGame(Mode: .Normal, Starting_Letter: .E, Randomize: .on)
 
 // myGame.startGame(Mode: .StartWLetter)
 
-//myGame.enterWord(Enter_A_Word: "McDonalds")
-
-//myGame.enterWord(Enter_A_Word: "Arbys")
-
 /* Testing when all letters in alphabet are used
+
+myGame.enterWord(Enter_A_Word: "A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z")
+
 myGame.enterWord(Enter_A_Word: "a")
 myGame.enterWord(Enter_A_Word: "b")
 myGame.enterWord(Enter_A_Word: "c")
