@@ -17,6 +17,44 @@ struct Letters {
     static let max = 26
 }
 
+struct Instructions {
+    static func show() {
+        print("------------")
+        print("How to Start")
+        print("------------")
+        print("Use the .startGame method to select a game mode, then you can")
+        print("choose a starting letter.\n")
+        print("If you would like to shuffle the letters into a random order,")
+        print("choose .on, otherwise choose .off\n\n")
+        
+        print("-----------")
+        print("How to Play")
+        print("-----------")
+        print("Find all 26 letters of the alphabet on things that you pass as you")
+        print("are going down the road, in alphabetical order.\n")
+        print("Use the .enterWord method to add in each word, the game will then")
+        print("show you the next letter to find.\n")
+        print("After all 26 letters are found, the game ends and your final")
+        print("results will display.\n\n")
+        
+        print("----------")
+        print("Game Modes")
+        print("----------")
+        print("Normal: The word must contain the current round's letter")
+        print("Starts With Letter: The word must start with current round's letter")
+        print("Only Signs: Can only use letters found on signs")
+        print("Only License Plates: Can only use letters found on license plates\n\n")
+        
+        print("-------")
+        print("Options")
+        print("-------")
+        print(".saveGame: Saves a copy of the current game stats to the ledger")
+        print(".resetGame: Resets all game stats. Must use .startGame after")
+        print(".endGame: Ends the game, and saves a copy of the current game")
+        print("stats to the ledger, and displays all the found words in order\n\n")
+    }
+}
+
 // Global variables
 struct GameLedger {
     static var pastGames = [String:Any]() // to save each game instance
@@ -68,7 +106,8 @@ class ABCGame {
     // Only asks for input of player names and displays the instructions on creation
     init(Player_Names: [String]) {
         self.players = Player_Names
-        instructions()
+        print("      *** LET'S PLAY THE ALPHABET ROAD GAME ***")
+        print("(to learn how to play, use the .instructions() method)\n\n")
     }
     
     // Sets the current time and formats as a legible string
@@ -82,33 +121,7 @@ class ABCGame {
     
     // Displays instructions for how to start and play a game
     func instructions() {
-        print("*** LET'S PLAY THE ALPHABET ROAD GAME ***\n\n")
-        
-        print("------------")
-        print("How to Start")
-        print("------------")
-        print("Use the .startGame method to select a game mode, then you can")
-        print("choose a starting letter.\n")
-        print("If you would like to shuffle the letters into a random order,")
-        print("choose .on, otherwise choose .off\n\n")
-        
-        print("-----------")
-        print("How to Play")
-        print("-----------")
-        print("Find all 26 letters of the alphabet on things that you pass as you")
-        print("are going down the road, in alphabetical order.\n")
-        print("Use the .enterWord method to add in each word, the game will then")
-        print("show you the next letter to find.\n")
-        print("After all 26 letters are found, the game ends and your final")
-        print("results will display.\n\n")
-        
-        print("----------")
-        print("Game Modes")
-        print("----------")
-        print("Normal: the word must contain the current round's letter")
-        print("Starts With Letter: the word must start with current round's letter")
-        print("Only Signs: can only use letters found on signs")
-        print("Only License Plates: can only use letters found on license plates\n")
+        Instructions.show()
     }
     
     // Begins a new game by setting desired game mode, starting letter, and randomize on or off
@@ -152,11 +165,33 @@ class ABCGame {
         print("The first letter is \(gameLetters[wordIndex])\n")
     }
     
+    // Saves current game to game ledger
+    func saveGame() {
+        thisGame.words = gameWords
+        GameLedger.pastGames[timeStamp] = thisGame // uses the time made as the key, may change later
+    }
+    
+    // Sets all game variables back to beginging condition
+    func resetGame(Players: [String]) {
+        gameMode = .Normal
+        timeStamp = ""
+        gameLetters = Letters.alphabet
+        gameWords = []
+        wordIndex = 0
+        randomMode = ToggleSwitch.off
+        letterCounter = 0
+        startingLetter = LetterChoices.A
+        thisGame = GameInfo(players: players, mode: gameMode, randomized: randomMode, firstLetter: startingLetter, words: gameWords)
+        players = Players
+    }
+    
     // Used within enterWord func to trigger the end of a game when 26th letter has been used
     func endGame() {
         var counter = 1 // for printing results when game is complete
         
         if self.gameWords.count == Letters.max {
+            saveGame() // makes a final copy for the game ledger
+            
             print("\nHurray, you finished the game!")
             print("Lets see your words")
             print("''''''''''''''''''''''''''''''")
@@ -226,6 +261,7 @@ class ABCGame {
 }
  
 var myGame = ABCGame(Player_Names: ["Player 1", "Player 2"])
+myGame.instructions()
 
 myGame.startGame(Mode: .Normal, Starting_Letter: .E, Randomize: .on)
 
