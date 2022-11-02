@@ -49,9 +49,7 @@ struct Instructions {
         print("Options")
         print("-------")
         print(".saveGame: Saves a copy of the current game stats to the ledger")
-        print(".resetGame: Resets all game stats. Must use .startGame after")
-        print(".endGame: Ends the game, and saves a copy of the current game")
-        print("stats to the ledger, and displays all the found words in order\n\n")
+        print(".resetGame: Resets all game stats. Must use .startGame after\n\n")
     }
 }
 
@@ -106,7 +104,7 @@ class ABCGame {
     // Only asks for input of player names and displays the instructions on creation
     init(Player_Names: [String]) {
         self.players = Player_Names
-        print("      *** LET'S PLAY THE ALPHABET ROAD GAME ***")
+        print("      *** LET'S PLAY THE ALPHABET ROAD GAME ***\n")
         print("(to learn how to play, use the .instructions() method)\n\n")
     }
     
@@ -263,7 +261,7 @@ class ABCGame {
 var myGame = ABCGame(Player_Names: ["Player 1", "Player 2"])
 myGame.instructions()
 
-myGame.startGame(Mode: .Normal, Starting_Letter: .E, Randomize: .on)
+// myGame.startGame(Mode: .Normal, Starting_Letter: .E, Randomize: .on)
 
 // myGame.startGame(Mode: .StartWLetter)
 
