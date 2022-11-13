@@ -17,8 +17,8 @@ print(currentTime())
 
 /* In Beta
 struct TopWords {
-    let word: String
-    let timesUsed: Int
+    var word: String
+    var timesUsed: Int
     var topWordLog: [String:Int] = [:]
     
     func showTopWords() {

@@ -58,6 +58,39 @@ struct GameLedger {
     static var pastGames = [String:Any]() // to save each game instance
 }
 
+
+var topWordLog: [String:Int] = [:]
+// In Beta
+struct TopWords {
+    var word: String
+    var timesUsed: Int
+    
+    // Either adds a tally to the times a word has been used, or adds the word to the log with an instance of one
+    func enterWord(word: String) {
+        var dictCount = 0
+        
+        for (item, instances) in topWordLog {
+            if item.uppercased() == word.uppercased() {
+                topWordLog[item] = instances + 1
+            } else {
+                dictCount += 1
+            }
+            if dictCount == topWordLog.count {
+                topWordLog[item.uppercased()] = 1
+            }
+        }
+    }
+ 
+    // Will show the top words used in order of most used to least
+    func showTopWords() {
+        var counter = 1
+        for (item, instances) in topWordLog {
+            print("\(counter). \(item) used \(instances) times")
+            counter += 1
+        }
+    }
+}
+
 // Enum for each game mode
 enum GameModes: String {
     case Normal = "Normal Mode"
@@ -204,6 +237,13 @@ class ABCGame {
                 }
                 counter += 1
             }
+            
+            // Add words to the Top Words Log
+            for (letter, word) in gameWords {
+                TopWords.enterWord(letter)
+            }
+            
+            print("\nCreate a new game to play again!") // instructs to create a new game instead of continuing
         } else { // Displays letter needed for next word
                 print("The next letter is \(gameLetters[wordIndex])")
         }
