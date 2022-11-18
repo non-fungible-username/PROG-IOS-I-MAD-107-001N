@@ -54,41 +54,53 @@ struct Instructions {
 }
 
 // Global variables
-struct GameLedger {
-    static var pastGames = [String:Any]() // to save each game instance
-}
+var topWordLog: [String:Int] = [:] // holds a key of every word ever entered paired to the number of times used
 
-
-var topWordLog: [String:Int] = [:]
-// In Beta
 struct TopWords {
-    var word: String
-    var timesUsed: Int
-    
     // Either adds a tally to the times a word has been used, or adds the word to the log with an instance of one
-    func enterWord(word: String) {
+    static func enterWord(word: String) {
         var dictCount = 0
         
-        for (item, instances) in topWordLog {
-            if item.uppercased() == word.uppercased() {
-                topWordLog[item] = instances + 1
-            } else {
-                dictCount += 1
-            }
-            if dictCount == topWordLog.count {
-                topWordLog[item.uppercased()] = 1
+        if topWordLog == [:] { // catches the first addition to the word log
+            topWordLog[word.uppercased()] = 1
+        } else {
+            for (item, instances) in topWordLog {
+                if item.uppercased() == word.uppercased() {
+                    topWordLog[item] = instances + 1
+                } else {
+                    dictCount += 1
+                }
+                if dictCount == topWordLog.count {
+                    topWordLog[word.uppercased()] = 1
+                }
             }
         }
     }
  
-    // Will show the top words used in order of most used to least
-    func showTopWords() {
+    // Will show the top 10 words used from all games in order of most used to least
+    static func showTopWords() {
+        let sortedByValueDictionary = topWordLog.sorted { $1.1 < $0.1 } // creates a dictionary sorted by value highest to lowest
         var counter = 1
-        for (item, instances) in topWordLog {
-            print("\(counter). \(item) used \(instances) times")
-            counter += 1
+        
+        print("THE TOP TEN LIST")
+        print("----------------")
+        
+        for (item, instances) in sortedByValueDictionary {
+            if counter <= 10 { // stops after 10 words
+                if counter < 10 { // for display setting
+                    print("0\(counter). \(item) used \(instances) times")
+                    counter += 1
+                } else {
+                    print("\(counter). \(item) used \(instances) times")
+                    counter += 1
+                }
+            }
         }
     }
+}
+
+struct GameLedger {
+    static var pastGames = [String:Any]() // to save each game instance
 }
 
 // Enum for each game mode
@@ -239,8 +251,8 @@ class ABCGame {
             }
             
             // Add words to the Top Words Log
-            for (letter, word) in gameWords {
-                TopWords.enterWord(letter)
+            for (_, word) in gameWords {
+                TopWords.enterWord(word: word)
             }
             
             print("\nCreate a new game to play again!") // instructs to create a new game instead of continuing
@@ -299,11 +311,8 @@ class ABCGame {
 }
  
 var myGame = ABCGame(Player_Names: ["Player 1", "Player 2"])
-myGame.instructions()
 
-// myGame.startGame(Mode: .Normal, Starting_Letter: .E, Randomize: .on)
-
-// myGame.startGame(Mode: .StartWLetter)
+// myGame.instructions()
 
 /* Testing when all letters in alphabet are used
 
