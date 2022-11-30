@@ -13,8 +13,8 @@ import UIKit
 // Global constants
 struct Letters {
     static let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
-                           "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-    static let max = 26
+                           "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"] // used to fill in a game instance's letter array
+    static let max = 26 // used to check if game is finished
 }
 
 struct Instructions {
@@ -48,8 +48,9 @@ struct Instructions {
         print("-------")
         print("Options")
         print("-------")
-        print(".saveGame: Saves a copy of the current game stats to the ledger")
-        print(".resetGame: Resets all game stats. Must use .startGame after\n\n")
+        print(".saveGame(): Saves a copy of the current game stats to the ledger")
+        print(".resetGame(): Resets all game stats. Must use .startGame after")
+        print("TopWords.showTopWords(): See the top 10 most used words from every game\n\n")
     }
 }
 
@@ -63,7 +64,7 @@ struct TopWords {
         
         if topWordLog == [:] { // catches the first addition to the word log
             topWordLog[word.uppercased()] = 1
-        } else {
+        } else {  // if the word was already used, this adds one to the number of instances in the word log
             for (item, instances) in topWordLog {
                 if item.uppercased() == word.uppercased() {
                     topWordLog[item] = instances + 1
@@ -99,8 +100,9 @@ struct TopWords {
     }
 }
 
+// Holds a copy of each game played
 struct GameLedger {
-    static var pastGames = [String:Any]() // to save each game instance
+    static var pastGames = [String:Any]()
 }
 
 // Enum for each game mode
@@ -117,7 +119,7 @@ enum ToggleSwitch: String {
     case off = "off"
 }
 
-// Enum for the players to pick the starting letter
+// Enum for the players to choose the starting letter
 enum LetterChoices: String {
     case A = "A", B = "B", C = "C", D = "D", E = "E", F = "F", G = "G", H = "H", I = "I", J = "J", K = "K", L = "L", M = "M", N = "N", O = "O", P = "P", Q = "Q", R = "R", S = "S", T = "T", U = "U", V = "V", W = "W", X = "X", Y = "Y", Z = "Z"
 }
@@ -314,9 +316,9 @@ var myGame = ABCGame(Player_Names: ["Player 1", "Player 2"])
 
 // myGame.instructions()
 
-/* Testing when all letters in alphabet are used
+myGame.startGame(Mode: .Normal, Starting_Letter: .A, Randomize: .off)
 
-myGame.enterWord(Enter_A_Word: "A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z")
+// Testing when all letters in alphabet are used
 
 myGame.enterWord(Enter_A_Word: "a")
 myGame.enterWord(Enter_A_Word: "b")
@@ -344,4 +346,7 @@ myGame.enterWord(Enter_A_Word: "w")
 myGame.enterWord(Enter_A_Word: "x")
 myGame.enterWord(Enter_A_Word: "y")
 myGame.enterWord(Enter_A_Word: "z")
-*/
+
+TopWords.showTopWords()
+
+myGame.resetGame(Players: ["Player 3", "Player 4"])
