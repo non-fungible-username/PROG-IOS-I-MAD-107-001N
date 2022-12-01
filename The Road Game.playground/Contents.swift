@@ -30,8 +30,8 @@ struct Instructions {
         print("-----------")
         print("How to Play")
         print("-----------")
-        print("Find all 26 letters of the alphabet on things that you pass as you")
-        print("are going down the road, in alphabetical order.\n")
+        print("Find all 26 letters of the alphabet in words on things that you")
+        print("pass as you are going down the road, in alphabetical order.\n")
         print("Use the .enterWord method to add in each word, the game will then")
         print("show you the next letter to find.\n")
         print("After all 26 letters are found, the game ends and your final")
@@ -312,14 +312,16 @@ class ABCGame {
     }
 }
  
+//******Testing Area******
+
 var myGame = ABCGame(Player_Names: ["Player 1", "Player 2"])
 
 // myGame.instructions()
 
-myGame.startGame(Mode: .Normal, Starting_Letter: .A, Randomize: .off)
+// myGame.startGame(Mode: .Normal, Starting_Letter: .A, Randomize: .off)
 
 // Testing when all letters in alphabet are used
-
+/*
 myGame.enterWord(Enter_A_Word: "a")
 myGame.enterWord(Enter_A_Word: "b")
 myGame.enterWord(Enter_A_Word: "c")
@@ -348,5 +350,42 @@ myGame.enterWord(Enter_A_Word: "y")
 myGame.enterWord(Enter_A_Word: "z")
 
 TopWords.showTopWords()
+*/
 
-myGame.resetGame(Players: ["Player 3", "Player 4"])
+// myGame.resetGame(Players: ["Player 3", "Player 4"])
+
+/*
+var myGame2 = ABCGame(Player_Names: ["Player 5, Player 6"])
+myGame2.startGame(Mode: .Normal, Starting_Letter: .G, Randomize: .off)
+
+// Example game with words used more than once
+
+myGame2.enterWord(Enter_A_Word: "Burger King")
+myGame2.enterWord(Enter_A_Word: "Hardy's")
+myGame2.enterWord(Enter_A_Word: "Burger King")
+myGame2.enterWord(Enter_A_Word: "Jimmy John's")
+myGame2.enterWord(Enter_A_Word: "Burger King")
+myGame2.enterWord(Enter_A_Word: "McDonald's")
+myGame2.enterWord(Enter_A_Word: "Jimmy John's")
+myGame2.enterWord(Enter_A_Word: "Burger King")
+myGame2.enterWord(Enter_A_Word: "Jimmy John's")
+myGame2.enterWord(Enter_A_Word: "Popeye's")
+myGame2.enterWord(Enter_A_Word: "Quizno's")
+myGame2.enterWord(Enter_A_Word: "Burger King")
+myGame2.enterWord(Enter_A_Word: "Quizno's")
+myGame2.enterWord(Enter_A_Word: "Starbucks")
+myGame2.enterWord(Enter_A_Word: "Quizno's")
+myGame2.enterWord(Enter_A_Word: "Five Guys")
+myGame2.enterWord(Enter_A_Word: "Whataburger")
+myGame2.enterWord(Enter_A_Word: "Zaxby's")
+myGame2.enterWord(Enter_A_Word: "Hardy's")
+myGame2.enterWord(Enter_A_Word: "Quizno's")
+myGame2.enterWord(Enter_A_Word: "McDonald's")
+myGame2.enterWord(Enter_A_Word: "Burger King")
+myGame2.enterWord(Enter_A_Word: "McDonald's")
+myGame2.enterWord(Enter_A_Word: "Hardy's")
+myGame2.enterWord(Enter_A_Word: "Burger King")
+myGame2.enterWord(Enter_A_Word: "Five Guys")
+*/
+
+// TopWords.showTopWords() // shows results from two games
