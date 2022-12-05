@@ -146,7 +146,7 @@ class ABCGame {
     var randomMode = ToggleSwitch.off // set when starting a new game
     var letterCounter = 0 // helps reorder letters when user chooses a starting letter
     var startingLetter: LetterChoices = .A // set when starting a new game
-    var thisGame = GameInfo(players: ["None"], mode: .Normal, randomized: .off, firstLetter: .A, words: [(letter: "-empty-", word: "-empty-")]) // I'm sure this can be done smarter
+    var thisGame = GameInfo(players: ["None"], mode: .Normal, randomized: .off, firstLetter: .A, words: [(letter: "-empty-", word: "-empty-")]) // creates a blank copy of the game that gets set when a player starts a new one
     
     // Only asks for input of player names and displays the instructions on creation
     init(Player_Names: [String]) {
@@ -213,7 +213,7 @@ class ABCGame {
     // Saves current game to game ledger
     func saveGame() {
         thisGame.words = gameWords
-        GameLedger.pastGames[timeStamp] = thisGame // uses the time made as the key, may change later
+        GameLedger.pastGames[timeStamp] = thisGame // uses the time made as the key
     }
     
     // Sets all game variables back to beginging condition
@@ -314,7 +314,7 @@ class ABCGame {
  
 //******Testing Area******
 
-var myGame = ABCGame(Player_Names: ["Player 1", "Player 2"])
+// var myGame = ABCGame(Player_Names: ["Player 1", "Player 2"])
 
 // myGame.instructions()
 
@@ -348,18 +348,18 @@ myGame.enterWord(Enter_A_Word: "w")
 myGame.enterWord(Enter_A_Word: "x")
 myGame.enterWord(Enter_A_Word: "y")
 myGame.enterWord(Enter_A_Word: "z")
-
-TopWords.showTopWords()
 */
+// TopWords.showTopWords()
+
 
 // myGame.resetGame(Players: ["Player 3", "Player 4"])
 
-/*
-var myGame2 = ABCGame(Player_Names: ["Player 5, Player 6"])
-myGame2.startGame(Mode: .Normal, Starting_Letter: .G, Randomize: .off)
+
+// var myGame2 = ABCGame(Player_Names: ["Player 5, Player 6"])
+// myGame2.startGame(Mode: .Normal, Starting_Letter: .G, Randomize: .off)
 
 // Example game with words used more than once
-
+/*
 myGame2.enterWord(Enter_A_Word: "Burger King")
 myGame2.enterWord(Enter_A_Word: "Hardy's")
 myGame2.enterWord(Enter_A_Word: "Burger King")
